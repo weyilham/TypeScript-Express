@@ -9,12 +9,14 @@ const morgan_1 = __importDefault(require("morgan"));
 const compression_1 = __importDefault(require("compression"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const UserRoute_1 = __importDefault(require("./routes/UserRoute"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
         this.plugins();
         this.routes();
+        dotenv_1.default.config();
     }
     plugins() {
         this.app.use(body_parser_1.default.json());
@@ -27,11 +29,12 @@ class App {
         this.app.route("/").get((req, res) => {
             res.send("Ini adalah Halaman Home!");
         });
-        this.app.use("/users", UserRoute_1.default);
+        this.app.use("/api/v1/users", UserRoute_1.default);
     }
 }
 const app = new App().app;
 const port = 3000;
 app.listen(port, () => {
     console.log("Server is running on port http://localhost:" + port);
+    // console.log(process.env.DB_HOST);
 });

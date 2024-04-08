@@ -4,6 +4,7 @@ import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
+import dotenv from "dotenv";
 
 import UserRoute from "./routes/UserRoute";
 
@@ -14,6 +15,7 @@ class App {
     this.app = express();
     this.plugins();
     this.routes();
+    dotenv.config();
   }
 
   protected plugins(): void {
@@ -29,7 +31,7 @@ class App {
       res.send("Ini adalah Halaman Home!");
     });
 
-    this.app.use("/users", UserRoute);
+    this.app.use("/api/v1/users", UserRoute);
   }
 }
 
@@ -38,4 +40,5 @@ const port: number = 3000;
 
 app.listen(port, () => {
   console.log("Server is running on port http://localhost:" + port);
+  // console.log(process.env.DB_HOST);
 });
