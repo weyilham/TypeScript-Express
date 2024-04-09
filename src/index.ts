@@ -7,7 +7,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import UserRoute from "./routes/UserRoute";
-
+import AuthRoute from "./routes/AuthRoute";
 class App {
   public app: Application;
 
@@ -32,6 +32,7 @@ class App {
     });
 
     this.app.use("/api/v1/users", UserRoute);
+    this.app.use("/api/v1/auth", AuthRoute);
   }
 }
 
@@ -40,5 +41,5 @@ const port: number = 3000;
 
 app.listen(port, () => {
   console.log("Server is running on port http://localhost:" + port);
-  // console.log(process.env.DB_HOST);
+  console.log("Press Ctrl+C to quit");
 });
